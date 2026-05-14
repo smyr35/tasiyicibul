@@ -1,0 +1,3 @@
+ilan listesinin filtreleme ve sıralama özelliğini eklemeliyiz
+taşıyıcı favorileme eklenebilir
+sql şifre funda4535

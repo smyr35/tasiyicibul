@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000'
+const BASE_URL = 'https://tasiyicibul.onrender.com'
 
 export async function getIlanlar(filtreler = {}) {
   const params = new URLSearchParams()

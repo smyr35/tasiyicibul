@@ -1,3 +1,9 @@
 ilan listesinin filtreleme ve sıralama özelliğini eklemeliyiz
 taşıyıcı favorileme eklenebilir
-sql şifre funda4535
+ilsnın süresi 3 gün geçince temizleme mekanizması kur
+kayıt sırasında şifreye kurallar getir
+
+
+
+
+sql şifre Funda4535!Tasiyici

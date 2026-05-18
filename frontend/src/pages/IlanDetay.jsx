@@ -1,4 +1,9 @@
-function IlanDetay({ ilan, onGeri }) {
+import { useState } from 'react'
+import MesajGonder from '../components/MesajGonder'
+
+function IlanDetay({ ilan, onGeri, kullanici }) {
+  const [mesajAcik, setMesajAcik] = useState(false)
+
   if (!ilan) return null
 
   return (
@@ -80,9 +85,16 @@ function IlanDetay({ ilan, onGeri }) {
               <div style={styles.iletisimLabel}>Telefon</div>
               <div style={styles.iletisimDeger}>{ilan.telefon}</div>
             </div>
-            <a href={`tel:${ilan.telefon}`} style={styles.btnAra}>
-              📞 Hemen ara
-            </a>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <a href={`tel:${ilan.telefon}`} style={styles.btnAra}>
+                📞 Hemen ara
+              </a>
+              {kullanici && kullanici.id !== ilan.kullanici_id && (
+                <button style={styles.btnMesaj} onClick={() => setMesajAcik(true)}>
+                  ✉️ Mesaj gönder
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -93,6 +105,15 @@ function IlanDetay({ ilan, onGeri }) {
           })}
         </div>
       </div>
+
+      {/* Mesaj modalı */}
+      {mesajAcik && (
+        <MesajGonder
+          ilan={ilan}
+          kullanici={kullanici}
+          onKapat={() => setMesajAcik(false)}
+        />
+      )}
     </div>
   )
 }
@@ -105,32 +126,28 @@ const styles = {
   tip: { fontSize: '13px', color: '#6b7280', marginBottom: '6px' },
   baslik: { fontSize: '22px', fontWeight: '700', color: '#111827' },
   badge: { fontSize: '12px', padding: '4px 12px', borderRadius: '20px', background: '#E1F5EE', color: '#0F6E56', fontWeight: '500' },
-
   rotaKart: { display: 'flex', alignItems: 'center', gap: '16px', margin: '24px', padding: '20px', background: '#f9fafb', borderRadius: '12px' },
   rotaItem: { flex: 1, textAlign: 'center' },
   rotaLabel: { fontSize: '12px', color: '#6b7280', marginBottom: '6px' },
   rotaSehir: { fontSize: '22px', fontWeight: '700', color: '#111827' },
   rotaOrta: { display: 'flex', alignItems: 'center', gap: '8px', flex: 2 },
   rotaCizgi: { flex: 1, height: '1px', background: '#d1d5db' },
-
   detayGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '12px', padding: '0 24px 24px' },
   detayKart: { background: '#f9fafb', borderRadius: '10px', padding: '16px', textAlign: 'center' },
   detayIcon: { fontSize: '20px', marginBottom: '8px' },
   detayLabel: { fontSize: '11px', color: '#6b7280', marginBottom: '4px' },
   detayDeger: { fontSize: '16px', fontWeight: '700', color: '#111827' },
   detayAlt: { fontSize: '12px', color: '#9ca3af', marginTop: '2px' },
-
   aciklamaKart: { margin: '0 24px 24px', padding: '16px', background: '#f9fafb', borderRadius: '10px' },
   aciklamaBaslik: { fontSize: '14px', fontWeight: '600', color: '#111827', marginBottom: '8px' },
   aciklamaMetin: { fontSize: '14px', color: '#6b7280', lineHeight: '1.6' },
-
   iletisimKart: { margin: '0 24px 24px', padding: '20px', border: '1px solid #e5e7eb', borderRadius: '12px' },
   iletisimBaslik: { fontSize: '14px', fontWeight: '600', color: '#111827', marginBottom: '12px' },
   iletisimRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
   iletisimLabel: { fontSize: '12px', color: '#6b7280', marginBottom: '4px' },
   iletisimDeger: { fontSize: '18px', fontWeight: '600', color: '#111827' },
   btnAra: { padding: '10px 24px', background: '#1D9E75', color: '#fff', borderRadius: '10px', fontSize: '14px', fontWeight: '600', textDecoration: 'none' },
-
+  btnMesaj: { padding: '10px 20px', background: '#fff', border: '1px solid #1D9E75', color: '#1D9E75', borderRadius: '10px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' },
   altBilgi: { padding: '16px 24px', borderTop: '1px solid #f3f4f6', fontSize: '12px', color: '#9ca3af' },
 }
 

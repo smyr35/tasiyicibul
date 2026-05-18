@@ -2,6 +2,7 @@ ilan listesinin filtreleme ve sıralama özelliğini eklemeliyiz
 taşıyıcı favorileme eklenebilir
 ilsnın süresi 3 gün geçince temizleme mekanizması kur
 kayıt sırasında şifreye kurallar getir
+ilan verirken tel no kotnrolü
 
 
 

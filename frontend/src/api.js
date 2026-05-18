@@ -1,4 +1,5 @@
 const BASE_URL = 'https://tasiyicibul.onrender.com'
+//const BASE_URL = 'http://localhost:5000'
 
 export async function getIlanlar(filtreler = {}) {
   const params = new URLSearchParams()
@@ -53,6 +54,34 @@ export async function ilanSil(id) {
   const token = localStorage.getItem('token')
   const res = await fetch(`${BASE_URL}/api/ilanlar/${id}`, {
     method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  return res.json()
+}
+export async function mesajGonder(data) {
+  const token = localStorage.getItem('token')
+  const res = await fetch(`${BASE_URL}/api/mesajlar`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  })
+  return res.json()
+}
+
+export async function gelenMesajlar() {
+  const token = localStorage.getItem('token')
+  const res = await fetch(`${BASE_URL}/api/mesajlar/gelen`, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  return res.json()
+}
+
+export async function gidenMesajlar() {
+  const token = localStorage.getItem('token')
+  const res = await fetch(`${BASE_URL}/api/mesajlar/giden`, {
     headers: { Authorization: `Bearer ${token}` },
   })
   return res.json()

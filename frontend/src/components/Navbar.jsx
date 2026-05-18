@@ -1,4 +1,4 @@
-function Navbar({ kullanici, onYeniIlan, onGiris, onCikis, onLogo, onProfil }) {
+function Navbar({ kullanici, onYeniIlan, onGiris, onCikis, onLogo, onProfil, onMesajlar }) {
   return (
     <nav style={styles.nav}>
       <div style={{ ...styles.logo, cursor: 'pointer' }} onClick={onLogo}>
@@ -10,6 +10,7 @@ function Navbar({ kullanici, onYeniIlan, onGiris, onCikis, onLogo, onProfil }) {
             <span style={{ ...styles.hosgeldin, cursor: 'pointer' }} onClick={onProfil}>
               👤 {kullanici.ad}
             </span>
+            <button style={styles.btnOutline} onClick={onMesajlar}>✉️ Mesajlar</button>
             <button style={styles.btnOutline} onClick={onCikis}>Çıkış yap</button>
             <button style={styles.btnPrimary} onClick={onYeniIlan}>+ İlan ver</button>
           </>

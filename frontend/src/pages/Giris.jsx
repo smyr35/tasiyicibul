@@ -23,6 +23,7 @@ function Giris({ onGiris }) {
         localStorage.setItem('token', sonuc.token)
         localStorage.setItem('kullanici', JSON.stringify(sonuc.kullanici))
         onGiris(sonuc.kullanici)
+        console.log('Giriş sonucu:', sonuc)
       }
     } catch (err) {
       setHata('Bir hata oluştu, tekrar deneyin')

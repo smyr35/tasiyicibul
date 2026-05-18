@@ -6,6 +6,7 @@ import YeniIlan from './pages/YeniIlan'
 import Giris from './pages/Giris'
 import IlanDetay from './pages/IlanDetay'
 import Profil from './pages/Profil'
+import Mesajlar from './pages/Mesajlar'
 
 function App() {
   const [sayfa, setSayfa] = useState('anasayfa')
@@ -43,6 +44,7 @@ function App() {
         onCikis={cikisYap}
         onLogo={() => setSayfa('anasayfa')}
         onProfil={() => setSayfa('profil')}
+        onMesajlar={() => setSayfa('mesajlar')}
       />
       {sayfa === 'anasayfa' && (
         <>
@@ -60,7 +62,7 @@ function App() {
       )}
       {sayfa === 'yeniilan' && <YeniIlan onGeriDon={() => setSayfa('anasayfa')} />}
       {sayfa === 'giris' && <Giris onGiris={girisYapildi} />}
-      {sayfa === 'detay' && <IlanDetay ilan={seciliIlan} onGeri={() => setSayfa('anasayfa')} />}
+      {sayfa === 'detay' && <IlanDetay ilan={seciliIlan} onGeri={() => setSayfa('anasayfa')} kullanici={kullanici} />}
       {sayfa === 'profil' && (
         <Profil
           kullanici={kullanici}
@@ -68,6 +70,7 @@ function App() {
           onCikis={cikisYap}
         />
       )}
+      {sayfa === 'mesajlar' && <Mesajlar />}
     </div>
   )
 }

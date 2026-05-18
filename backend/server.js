@@ -3,6 +3,7 @@ const cors = require('cors')
 require('dotenv').config()
 const db = require('./db')
 const authRouter = require('./auth')
+const mesajlarRouter = require('./mesajlar')
 
 const app = express()
 const PORT = process.env.PORT || 5000
@@ -11,6 +12,7 @@ const tokenKontrol = require('./middleware')
 app.use(cors())
 app.use(express.json())
 app.use('/api/auth', authRouter)
+app.use('/api/mesajlar', mesajlarRouter)
 
 app.get('/', (req, res) => {
   res.json({ mesaj: 'TaşıyıcıBul backend çalışıyor! 🚛' })

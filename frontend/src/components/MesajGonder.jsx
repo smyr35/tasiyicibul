@@ -8,7 +8,16 @@ function MesajGonder({ ilan, kullanici, onKapat }) {
   const [hata, setHata] = useState('')
 
   const gonder = async () => {
-    if (!mesaj.trim()) return
+    if (!mesaj.trim()) {
+      setHata('Mesaj boş gönderilemez.')
+      return
+    }
+
+    if (kullanici && ilan.kullanici_id === kullanici.id) {
+      setHata('Kendi ilanınıza mesaj gönderemezsiniz.')
+      return
+    }
+
     setYukleniyor(true)
     setHata('')
     try {
@@ -65,7 +74,11 @@ function MesajGonder({ ilan, kullanici, onKapat }) {
             value={mesaj}
             onChange={e => setMesaj(e.target.value)}
             rows={5}
+            maxLength={500}
           />
+          <div style={styles.karakterSayac}>
+            {mesaj.length} / 500 karakter
+          </div>
         </div>
 
         {hata && <div style={styles.hata}>⚠️ {hata}</div>}
@@ -96,13 +109,4 @@ const styles = {
   ilanTip: { fontSize: '12px', color: '#6b7280' },
   label: { display: 'block', fontSize: '13px', color: '#6b7280', marginBottom: '6px' },
   textarea: { width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px', color: '#111827', outline: 'none', resize: 'vertical', boxSizing: 'border-box' },
-  hata: { marginTop: '10px', padding: '10px', background: '#FEF2F2', border: '1px solid #FCA5A5', borderRadius: '8px', fontSize: '13px', color: '#DC2626' },
-  footer: { display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '20px' },
-  btnIptal: { padding: '9px 20px', border: '1px solid #d1d5db', borderRadius: '8px', background: 'transparent', fontSize: '14px', cursor: 'pointer', color: '#6b7280' },
-  btnGonder: { padding: '9px 24px', background: '#1D9E75', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' },
-  basariIcon: { width: '56px', height: '56px', borderRadius: '50%', background: '#E1F5EE', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', color: '#0F6E56', margin: '0 auto 16px', fontWeight: '700' },
-  altBaslik: { fontSize: '14px', color: '#6b7280', textAlign: 'center', marginBottom: '24px' },
-  btnKapat: { width: '100%', padding: '10px', background: '#1D9E75', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '14px', fontWeight: '600', cursor: 'pointer' },
-}
-
-export default MesajGonder
+  karakterSayac: { fontSize: '12px', color: '#9ca3af', textAlign: 'righ

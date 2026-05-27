@@ -10,6 +10,15 @@ router.post('/', tokenKontrol, async (req, res) => {
     return res.status(400).json({ hata: 'Tüm alanlar gerekli' })
   }
   try {
+    // Daha önce mesaj gönderilmiş mi?
+    const mevcutMesaj = await db.query(
+      'SELECT id FROM mesajlar WHERE ilan_id = $1 AND gonderen_id = $2',
+      [ilan_id, req.kullanici.id]
+    )
+    if (mevcutMesaj.rows.length > 0) {
+      return res.status(400).json({ hata: 'Bu ilana zaten mesaj göndermişsiniz' })
+    }
+
     const sonuc = await db.query(
       `INSERT INTO mesajlar (ilan_id, gonderen_id, alici_id, mesaj)
        VALUES ($1, $2, $3, $4) RETURNING *`,

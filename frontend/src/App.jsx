@@ -62,7 +62,7 @@ function App() {
       )}
       {sayfa === 'yeniilan' && <YeniIlan onGeriDon={() => setSayfa('anasayfa')} />}
       {sayfa === 'giris' && <Giris onGiris={girisYapildi} />}
-      {sayfa === 'detay' && <IlanDetay ilan={seciliIlan} onGeri={() => setSayfa('anasayfa')} kullanici={kullanici} />}
+     {sayfa === 'detay' && <IlanDetay ilan={seciliIlan} onGeri={() => setSayfa('anasayfa')} kullanici={kullanici} onGiris={() => setSayfa('giris')} />}
       {sayfa === 'profil' && (
         <Profil
           kullanici={kullanici}

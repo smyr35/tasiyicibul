@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import MesajGonder from '../components/MesajGonder'
+import { useEffect } from 'react'
 
-function IlanDetay({ ilan, onGeri, kullanici }) {
+function IlanDetay({ ilan, onGeri, kullanici, onGiris }) {
   const [mesajAcik, setMesajAcik] = useState(false)
-
+  useEffect(() => {
+    if (!kullanici) {
+      onGiris()
+    }
+  }, [kullanici])
   if (!ilan) return null
 
   return (
